@@ -1,0 +1,24 @@
+import java.util.Scanner;
+
+public class JavaStudy02_2 {
+
+       public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int total = 0;
+
+        System.out.println("결제 금액을 입력해 주세요.(금액):");
+        int payment = sc.nextInt();
+        int cashBack = 0;
+        cashBack = (int) (payment * 0.1);
+        if (cashBack<200){
+            cashBack=100;
+        } else if (cashBack<300) {
+            cashBack=200;
+        } else{
+            cashBack=300;
+        }
+        total += cashBack;
+        System.out.printf("결제금액은 %d원 이고, 캐시백은 %d원 입니다.", payment, cashBack);
+
+    }
+}
