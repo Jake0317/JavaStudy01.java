@@ -1,0 +1,80 @@
+import java.time.LocalDate;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("[달력 출력 프로그램]");
+        System.out.print("달력의 년도를 입력해 주세요.(yyyy): ");
+        int year = sc.nextInt();
+        System.out.print("달력의 월을 입력해 주세요.(mm):");
+        int month = sc.nextInt();
+        int preYear = (month==1)?year-1:year;
+        int nextYear = (month==12)?year+1:year;
+        int preMonth = (month==1)?12:month-1;
+        int nextMonth = (month==12)?1:month+1;
+        LocalDate preDate=LocalDate.of(preYear, preMonth, 1);
+        LocalDate date=LocalDate.of(year, month, 1);
+        LocalDate nextDate=LocalDate.of(nextYear, nextMonth, 1);
+        int preLDate = 1;
+        int LDate = 1;
+        int nextLDate = 1;
+        System.out.print("[" + preYear + "년 " + String.format("%02d", (preMonth)) + "월]" + "\t\t\t\t");
+        System.out.print("[" + year + "년 " + String.format("%02d", month) + "월]" + "\t\t\t\t");
+        System.out.println("[" + nextYear + "년 " + String.format("%02d", (nextMonth)) + "월]");
+        System.out.print("일\t월\t화\t수\t목\t금\t토\t");
+        System.out.print("일\t월\t화\t수\t목\t금\t토\t");
+        System.out.println("일\t월\t화\t수\t목\t금\t토");
+        int day=0;
+        for (int i = 0; i < preDate.getDayOfWeek().getValue()%7; i++) {
+            System.out.print("\t");
+            day++;
+        }
+        for (int i = day; i < 7; i++) {
+            System.out.printf("%02d\t", preLDate++);
+            day++;
+
+        }
+        day = 0;
+        for (int i = 0; i < date.getDayOfWeek().getValue()%7; i++) {
+            System.out.print("\t");
+            day++;
+        }
+        for (int i = day; i < 7; i++) {
+            System.out.printf("%02d\t", LDate++);
+            day++;
+        }
+        day = 0;
+        for (int i = 0; i < nextDate.getDayOfWeek().getValue()%7; i++) {
+            System.out.print("\t");
+            day++;
+        }
+        for (int i = day; i < 7; i++) {
+            System.out.printf("%02d\t", nextLDate++);
+            day++;
+        }
+        System.out.println();
+        int round = Math.max(Math.max(preDate.lengthOfMonth(),date.lengthOfMonth()),nextDate.lengthOfMonth());
+        int maxDate = 0;
+        while(maxDate<round){
+            day = 0;
+            for (int i = day; i < 7; i++) {
+                System.out.printf("%s\t", (preLDate>preDate.lengthOfMonth())?"  ":String.format("%02d", preLDate++));
+                day++;
+
+            }
+            day = 0;
+            for (int i = 0; i < 7; i++) {
+                System.out.printf("%s\t", (LDate>date.lengthOfMonth())?"  ":String.format("%02d", LDate++));
+                day++;
+            }
+            day = 0;
+            for (int i = day; i < 7; i++) {
+                System.out.printf("%s\t", (nextLDate>nextDate.lengthOfMonth())?"  ":String.format("%02d", nextLDate++));
+                day++;
+            }
+            maxDate+=7;
+            System.out.println();
+        }
+    }
+}
